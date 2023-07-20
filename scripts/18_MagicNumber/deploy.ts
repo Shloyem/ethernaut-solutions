@@ -1,12 +1,13 @@
 import { ethers } from "hardhat";
 import { expect } from "chai";
+import SolverABI from "../../artifacts/contracts/18_MagicNumber/ISolver.sol/ISolver.json";
 
 async function main() {
   const [deployer] = await ethers.getSigners();
   const creationBytecode = "69602a60005260206000f3600052600a6016f3";
   const EXPECTED_RESULT = 42;
 
-  const factory = new ethers.ContractFactory(ABI, creationBytecode, deployer);
+  const factory = new ethers.ContractFactory(SolverABI.abi, creationBytecode, deployer);
   const deployed = await factory.deploy();
   console.log("Contract deployed to:", deployed.address);
 
@@ -21,19 +22,3 @@ main()
     console.error(error);
     process.exit(1);
   });
-
-const ABI = [
-  {
-    "inputs": [],
-    "name": "whatIsTheMeaningOfLife",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  }
-]
